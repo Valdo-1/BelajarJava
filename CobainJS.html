@@ -1,0 +1,133 @@
+html<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulator 7 Gerbang Logika</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background-color: #f4f7f6; }
+        .wadah { background: white; padding: 20px; border-radius: 8px; display: inline-block; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        select, button { padding: 8px; font-size: 16px; margin: 5px; font-weight: bold; cursor: pointer; }
+        button { background-color: #2c3e50; color: white; border: none; border-radius: 4px; }
+        button:hover { background-color: #34495e; }
+        .kotak-hasil { margin-top: 20px; padding: 15px; background: #eef2f3; border-left: 5px solid #2c3e50; border-radius: 0 4px 4px 0; }
+        p { margin: 8px 0; font-family: monospace; font-size: 16px; font-weight: bold; }
+        .true-color { color: #27ae60; } /* Warna hijau untuk nilai 1 (True) */
+        .false-color { color: #c0392b; } /* Warna merah untuk nilai 0 (False) */
+    </style>
+</head>
+<body>
+
+    <div class="wadah">
+        <h2>Simulator 7 Gerbang Logika</h2>
+        <p>Tentukan nilai Input A dan Input B, lalu klik Hitung!</p>
+
+        <!-- Pilihan untuk Input A (Hanya ada 0 atau 1) -->
+        <label>Input A:</label>
+        <select id="inputA">
+            <option value="0">0 (False)</option>
+            <option value="1">1 (True)</option>
+        </select>
+
+        <!-- Pilihan untuk Input B (Hanya ada 0 atau 1) -->
+        <label>Input B:</label>
+        <select id="inputB">
+            <option value="0">0 (False)</option>
+            <option value="1">1 (True)</option>
+        </select>
+
+        <!-- Tombol pemicu hitungan semua gerbang -->
+        <button onclick="hitungLogika()">Hitung Semua Gerbang</button>
+
+        <!-- Tempat menampilkan 7 hasil gerbang logika di layar tab web -->
+        <div class="kotak-hasil">
+            <p id="res-not">1. NOT A  = <span class="false-color">0</span></p>
+            <p id="res-and">2. AND    = <span class="false-color">0</span></p>
+            <p id="res-nand">3. NAND   = <span class="false-color">0</span></p>
+            <p id="res-or">4. OR     = <span class="false-color">0</span></p>
+            <p id="res-nor">5. NOR    = <span class="false-color">0</span></p>
+            <p id="res-xor">6. XOR    = <span class="false-color">0</span></p>
+            <p id="res-xnor">7. XNOR   = <span class="false-color">0</span></p>
+        </div>
+    </div>
+
+    <script>
+        function hitungLogika() {
+            // -----------------------------------------------------------------
+            // 1. PENGAMBILAN DATA INPUT
+            // -----------------------------------------------------------------
+            // Mengambil nilai teks "0" atau "1" dari dropdown HTML menggunakan murni querySelector (#)
+            let teksA = document.querySelector("#inputA").value;
+            let teksB = document.querySelector("#inputB").value;
+
+            // Mengubah teks string menjadi tipe data Boolean asli komputer (true/false)
+            // Jika teksnya "1" maka bernilai true, jika "0" maka bernilai false
+            let a = (teksA === "1");
+            let b = (teksB === "1");
+
+            // -----------------------------------------------------------------
+            // 2. PROSES OPERASI 7 GERBANG LOGIKA (OTAK KOMPUTER)
+            // -----------------------------------------------------------------
+
+            // [Gerbang 1: NOT] -> Tugasnya membalikkan nilai Input A saja.
+            // Simbol: !
+            // Jika A adalah true (1), maka hasilNot menjadi false (0). Begitupun sebaliknya.
+            let hasilNot = !a;
+
+            // [Gerbang 2: AND] -> Hanya menghasilkan true jika KEDUANYA bernilai true (1 dan 1).
+            // Simbol: &&
+            let hasilAnd = a && b;
+
+            // [Gerbang 3: NAND] -> Kebalikan total dari gerbang AND.
+            // Simbol: !(A && B)
+            // Dia akan bernilai true di semua kondisi, KECUALI saat inputnya 1 dan 1.
+            let hasilNand = !hasilAnd;
+
+            // [Gerbang 4: OR] -> Menghasilkan true jika SALAH SATU ATAU KEDUANYA bernilai true.
+            // Simbol: ||
+            // Dia baru bernilai false jika kedua inputnya sama-sama 0.
+            let hasilOr = a || b;
+
+            // [Gerbang 5: NOR] -> Kebalikan total dari gerbang OR.
+            // Simbol: !(A || B)
+            // Dia justru hanya akan bernilai true ketika kedua inputnya mati (0 dan 0).
+            let hasilNor = !hasilOr;
+
+            // [Gerbang 6: XOR] -> Hanya menghasilkan true jika KEDUA INPUTNYA BERBEDA (1 dan 0 atau 0 dan 1).
+            // Simbol JavaScript untuk bitwise XOR: ^
+            // Jika inputnya kembar (0 dan 0, atau 1 dan 1), hasilnya justru false (0).
+            let hasilXor = a ^ b;
+
+            // [Gerbang 7: XNOR] -> Kebalikan total dari gerbang XOR (Detektor Kembar).
+            // Simbol: Dibalik dari hasil XOR sebelumnya.
+            // Dia hanya menghasilkan true jika KEDUA INPUTNYA KEMBAR / SAMA.
+            let hasilXnor = !hasilXor;
+
+
+            // -----------------------------------------------------------------
+            // 3. TAMPILKAN DAN BERI WARNA OTOMATIS KE LAYAR TAB WEB
+            // -----------------------------------------------------------------
+            // Fungsi pembantu buatan kita untuk mengubah isi teks HTML sekaligus memberikan warna.
+            // Jika hasil gerbangnya true, teks di web berubah jadi "1 (True)" berwarna hijau.
+            // Jika hasil gerbangnya false, teks di web berubah jadi "0 (False)" berwarna merah.
+            function tampilkanDanWarnai(targetId, labelTeks, nilaiLogika) {
+                let elemen = document.querySelector(targetId);
+                if (nilaiLogika) {
+                    elemen.innerHTML = `${labelTeks} = <span class="true-color">1 (True)</span>`;
+                } else {
+                    elemen.innerHTML = `${labelTeks} = <span class="false-color">0 (False)</span>`;
+                }
+            }
+
+            // Memanggil fungsi pembantu di atas untuk memperbarui ke-7 baris teks di halaman web kita
+            tampilkanDanWarnai("#res-not",  "1. NOT A ", hasilNot);
+            tampilkanDanWarnai("#res-and",  "2. AND   ", hasilAnd);
+            tampilkanDanWarnai("#res-nand", "3. NAND  ", hasilNand);
+            tampilkanDanWarnai("#res-or",   "4. OR    ", hasilOr);
+            tampilkanDanWarnai("#res-nor",  "5. NOR   ", hasilNor);
+            tampilkanDanWarnai("#res-xor",  "6. XOR   ", hasilXor);
+            tampilkanDanWarnai("#res-xnor", "7. XNOR  ", hasilXnor);
+        }
+    </script>
+</body>
+</html>

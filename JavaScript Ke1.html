@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // variable = penampung
+        // value / nilai
+        // deklarasi Variable : var,let,const
+        // var = nilainya bisa diubah
+        // let = nilainya bisa diubah
+        // const = nilainya tetap
+        // >= lebih besar atau sama dengan
+        // >lebih besar dari
+        // <=lebih kecil atau sama dengan    // <lebih kecil dari
+        // ==sama dengan
+        // !=tidak sama dengan
+
+        let umur = 25;
+        let anak = 20;
+
+        // console.log(nama);
+        // console.log(nilai);
+        // object atau array:
+        const daftarBuku = [
+            {
+                id: 1, judul: "Hari-hari Belajar", stock: 5
+            },
+            {
+                id: 2, judul: "Mari Kita NGODING", stock: 6
+            }
+        ];
+        daftarBuku.push({ id: 3, judul: "Komik One Piece", stock: 7 });
+
+        // FOR = Looping atau perulangan
+        for (let i = 0; i < daftarBuku.length; i++) {
+            console.log(`index ke - ${i} ${daftarBuku[i].judul}`);
+        }
+        console.log(daftarBuku[0]);
+        console.log(daftarBuku[1]);
+        console.log(daftarBuku[2]);
+        console.log(daftarBuku[3]);
+
+
+        //concat
+        const namaDepan = "Muhammad";
+        const namaBelakang = "Osvaldo Rios";
+        const gabungan = `${namaDepan} ${namaBelakang}`;
+
+        console.log(namaDepan + " " + namaBelakang);
+        console.log(gabungan);
+
+        // (* = kali )
+        // (/ = bagi )
+        // (+ = tambah)
+        // (- = kurang)
+
+        let a1 = 20;
+        let a2 = 30;
+        let hasilKali = a1 * a2;
+        let hasilBagi = a1 / a2;
+        let hasilTambah = a1 + a2;
+        let hasilKurang = a1 - a2;
+
+        console.log(hasilBagi);
+        console.log(hasilKali);
+        console.log(hasilTambah);
+        console.log(hasilKurang);
+        console.log(`Hasil bagi dari ${a1} / ${a2} = ${hasilBagi}`);
+        console.log(`Hasil kali dari ${a1} * ${a2} = ${hasilKali}`);
+        console.log(`Hasil tambah dari ${a1} + ${a2} = ${hasilTambah}`);
+        console.log(`Hasil kurang dari ${a1} - ${a2} = ${hasilKurang}`);
+
+        let umur1 = "35";
+        let parsing = parseInt(umur1);
+        let parfloat = parseFloat(umur1);
+
+        console.log(umur1 + 8);
+        console.log(parsing + 8);
+        console.log(8 / parfloat);
+
+        // JSON = javascript object nation
+        // JSON.parse
+        // server akan ngirim dara bertipe string lalu di js client/fe nangkep dan diubah jadi json (object)
+        let dataDariServer = '{"nama": " Bono", "Umur": 40 Tahun}';
+        console.log(dataDariServer);
+
+
+        // Gerbang LOGIKA AND, OR,NOR,XOR,NOT,NAND dan XNOR.
+    
+      <!-- 
+// =====================================================================
+//             CATATAN LENGKAP: 7 GERBANG LOGIKA (TRUTH TABLE)
+// =====================================================================
+// Aturan Komentar HTML: Catatan ini dibungkus agar tidak dibaca oleh browser.
+
+// 1. AND (Simbol di JavaScript adalah: &&)
+//    Kunci: Hanya bernilai True jika KEDUANYA True.
+//    X       Y       RESULT
+//    T       F       F
+//    F       T       F
+//    T       T       T
+//    F       F       F
+
+// 2. OR (Simbol di JavaScript adalah: ||)
+//    Kunci: Bernilai True jika SALAH SATU atau KEDUANYA True.
+//    X       Y       RESULT
+//    T       F       T
+//    F       T       T
+//    T       T       T
+//    F       F       F
+
+// 3. NOR (Simbol di JavaScript adalah: !(X || Y))
+//    Kunci: Kebalikan total dari OR. Hanya bernilai True jika KEDUANYA False.
+//    X       Y       RESULT
+//    T       F       F
+//    F       T       F
+//    T       T       F
+//    F       F       T
+
+// 4. XOR (Simbol di JavaScript adalah: X ^ Y)
+//    Kunci: Hanya bernilai True jika nilai X dan Y BERBEDA.
+//    X       Y       RESULT
+//    T       F       T
+//    F       T       T
+//    T       T       F
+//    F       F       F
+
+// 5. NOT (Simbol di JavaScript adalah: !)
+//    Kunci: Hanya menerima 1 input. Tugasnya membalikkan nilai asli.
+//    X       RESULT
+//    T       F
+//    F       T
+
+// 6. NAND (Simbol di JavaScript adalah: !(X && Y))
+//    Kunci: Kebalikan total dari AND. Hanya bernilai False jika KEDUANYA True.
+//    X       Y       RESULT
+//    T       F       T
+//    F       T       T
+//    T       T       F
+//    F       F       T
+
+// 7. XNOR (Simbol di JavaScript adalah: !(X ^ Y))
+//    Kunci: Kebalikan total dari XOR. Hanya bernilai True jika nilainya KEMBAR/SAMA.
+//    X       Y       RESULT
+//    T       F       F
+//    F       T       F
+//    T       T       T
+//    F       F       T
+// =====================================================================
+// -->
+
+
+// Operator Perbandingan Kesamaan:
+//==	: melakukan kesamaan value satu dengan yang lain.
+//==	: melakukan kesamaan value satu dengan yang lain,untuk yang === itu menyamakan juga tipe datanya.
+
+let usianya = "25";
+// Hasilnya: "True" 
+// Alasan: == hanya peduli isinya sama-sama angka 25, komputer maklum walau tipe datanya berbeda.
+console.log(usianya == 25 ? "True" : "False");
+
+// Hasilnya: "False" 🌟 (Berbeda!)
+// Alasan: === sangat galak. Isinya memang 25, tapi yang satu TEKS ("25") dan satunya lagi ANGKA (25). Komputer menganggapnya tidak cocok.
+console.log(usianya === 25 ? "True" : "False");
+
+let a = 4;
+let b ="4";
+
+console.log(a !=b); //false
+console.log(a !==b); //true
+
+//OPERATOR
+//>
+//>=
+//<
+//<=
+console.log(`4 > 4 ${4 > 4}`); // false
+console.log(`4 >= 4 ${4 >= 4}`); //true
+console.log(`4 < 4 ${4 < 4}`); // false
+console.log(`4 <= 4 ${4 <=4 }`); // true
+
+</script>
+</body>
+
+</html>

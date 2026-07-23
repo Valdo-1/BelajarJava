@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS3</title>
+</head>
+
+<body>
+    <form action="" method="post">
+        <input type="number" id="a1" placeholder="nomer">
+        <input type="number" id="a2" placeholder="nomer">
+        <select name="" id="operator" required>
+            <option value="">Pilih dulu</option>
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">÷</option>
+        </select>
+
+        <button onclick="hitungSemua(event)">Hitung</button>
+    </form>
+    <p id="hasil">Hasil Hitungan</p>
+    <script>
+        function hitungSemua(event) {
+            event.preventDefault();
+
+            let nomor1 = parseFloat(document.querySelector("#a1").value);
+            let nomor2 = parseFloat(document.querySelector("#a2").value);
+            let opt = document.querySelector("#operator").value;
+            let hasil = 0;
+
+            switch (opt) {
+                case "+":
+                    hasil = nomor1 + nomor2;
+                    break;
+                case "-":
+                    hasil = nomor1 - nomor2;
+                    break;
+                case "*":
+                    hasil = nomor1 * nomor2;
+                    break;
+                case "/":
+                    hasil = (nomor1 == 0 && nomor2 == 0) ? "0 tidak bisa dibagi 0" : (nomor2 == 0) ? "error" : nomor1 / nomor2;
+                    break;
+                default:
+                    break;
+
+            }
+            document.querySelector("#hasil").innerHTML = `Hasil Akhir: ${hasil}`;
+        }
+
+        //     if (opt == "+") {
+        //         hasil = nomor1 + nomor2;
+        //     } else if (opt == "-") {
+        //         hasil = nomor1 - nomor2;
+        //     } else if (opt == "*") {
+        //         hasil = nomor1 * nomor2;
+        //     } else if (opt == "/") {
+        //         hasil = (nomor1 == 0 && nomor2 == 0) ? "0 tidak bisa dibagi 0" :(nomor2 == 0) ? "error": nomor1/nomor2;
+        //     } else {
+        //         document.querySelector("#hasil").innerHTML = "PIlih"; return;
+        //         //hasil = 0;
+        //     }
+        //     document.querySelector("#hasil").innerHTML = `Hasil Akhir: ${hasil}`;
+
+    </script>
+
+
+
+
+
+
+    <!-- <p id="hasil-tambah"> hasil </p>
+    // <p id="hasil-kali"> hasil </p>
+    // <p id="hasil-bagi"> hasil </p>
+    // <p id="hasil-kurang"> hasil </p>
+    // <script>
+       
+    //     function hitungSemua() {
+    //         let nomor1 = parseFloat(document.querySelector("#a1").value);
+    //         let nomor2 = parseFloat(document.querySelector("#a2").value);
+    //         const Tambah = nomor1 + nomor2;
+    //         const Kali = nomor1 * nomor2;
+    //         const Bagi = nomor1 / nomor2;
+    //         const Kurang = nomor1 - nomor2;
+    //         document.querySelector("#hasil-tambah").innerHTML = `hasil: ${Tambah}`;
+    //         document.querySelector("#hasil-kali").innerHTML = `hasil: ${Kali}`;
+    //         document.querySelector("#hasil-bagi").innerHTML = `hasil: ${Bagi}`;
+    //         document.querySelector("#hasil-kurang").innerHTML = `hasil: ${Kurang}`;
+    //      } -->
+
+
+
+
+
+
+    <!--          
+         // function tampil()
+        // {
+        //     let inputan = document.querySelector(".text2").value;
+        //     let hasilAkhir =eval(inpurtan);
+        //     document.querySelector(".tampilan-layar").innerHTML = hasilAkhir;
+        // } -->
+
+    </script>
+
+
+    </button>
+</body>
+
+</html>
