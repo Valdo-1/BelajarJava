@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOALPPKD</title>
+</head>
+
+<body>
+    <form id="formHitung">
+        <input type="number" id="k1" placeholder="Jumlah kilo (maks 10)">
+        <select id="kota">
+            <option value="">Pilih Kota Tujuan</option>
+            <option value="bgr">Bogor</option>
+            <option value="dpk">Depok</option>
+            <option value="dll">Dll</option>
+        </select>
+        <button id="btn" type="submit">Hitung</button>
+    </form>
+    <p id="hasil">Hasil Hitungan</p>
+
+    <script>
+        document.querySelector("#formHitung").addEventListener("submit", hitungSemua);
+
+        function hitungSemua(event) {
+            event.preventDefault();
+
+            let kilo = Number(document.querySelector("#k1").value);
+            let kota = document.querySelector("#kota").value;
+
+            let bogor = 2000;
+            let depok = 4000;
+            let dll = 6000;
+            let hasil;
+
+
+            
+
+            // Validasi dulu
+            if (kota === "") {
+                hasil = "Pilih kota tujuan dulu!";
+            } else if (kilo <= 0) {
+                hasil = "Jumlah kilo harus lebih dari 0!";
+            } else if (kilo > 10) {
+                hasil = "Maksimal pengiriman 10 kilo!";
+            } else {
+                switch (kota) {
+                    case "bgr":
+                        hasil = "Rp" + (bogor * kilo);
+                        break;
+                    case "dpk":
+                        hasil = "Rp" + (depok * kilo);
+                        break;
+                    case "dll":
+                        hasil = "Rp" + (dll * kilo);
+                        break;
+                }
+            }
+
+            document.querySelector("#hasil").innerHTML = `Hasil Akhir: ${hasil}`;
+        }
+    </script>
+</body>
+
+</html>

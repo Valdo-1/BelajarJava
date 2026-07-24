@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <table border="10px">
+        <thead>
+            <tr>
+                <th>NIM </th>
+                <th>nama</th>
+                <th>Prodi</th>
+                <th>Gender</th>
+                <th>Alamat</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="table-mhs">
+            <tr>
+
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        // Data Mahasiswa:
+        const students = [
+            {
+                nim: "4817080433",
+                nama: "Osvaldo",
+                prodi: "Teknik Informatika",
+                gender: "Laki-laki",
+                alamat: "Cipinang",
+            },
+            {
+                nim: "4817080444",
+                nama: "Sugeng",
+                prodi: "Teknik Informatika",
+                gender: "Laki-laki",
+                alamat: "Cinere",
+            },
+            {
+                nim: "4817080455",
+                nama: "Subur",
+                prodi: "Teknik Informatika",
+                gender: "Laki-laki",
+                alamat: "Bekasi",
+            },
+            {
+                nim: "4817080466",
+                nama: "Susi",
+                prodi: "Teknik Informatika",
+                gender: "Perempuan",
+                alamat: "Depok ",
+            },
+
+        ];
+        let table_mhs = document.querySelector("#table-mhs");
+
+        function renderData() {
+            table_mhs.innerHTML = "";
+
+            for (let i = 0; i < students.length; i++) {
+                let baris = document.createElement('tr');
+                baris.innerHTML = `
+            <td>${students[i].nim}</td>
+            <td>${students[i].nama}</td>
+            <td>${students[i].prodi}</td>
+            <td>${students[i].gender}</td>
+            <td>${students[i].alamat}</td>
+            <td>
+            <button class='btn-hapus' data-hapus='${i}'> Hapus </button>
+            </td>
+            `;
+                table_mhs.appendChild(baris);
+
+            }
+        }
+
+        table_mhs.addEventListener("click", function (e) {
+            if (e.target.classList.contains('btn-hapus')) {
+                let indexData = e.target.getAttribute('data-hapus');
+                students.splice(indexData, 1);
+
+                renderData();
+            }
+        });
+        renderData();
+    </script>
+</body>
+
+</html>

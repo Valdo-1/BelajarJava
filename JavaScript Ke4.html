@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS4</title>
+</head>
+
+<body class="bdy">
+    <form action="" method="" id="form-tema">
+        <select name="" id="pilih-tema">
+            <option value=""></option>
+            <option value="terang">Kuning</option>
+            <option value="gelap">Hitam</option>
+            <option value="biru">Biru</option>
+
+        </select>
+        <button type="submit">Ganti Warna</button>
+    </form>
+    <p id="trn" style="display: none;">Selamat Siang, Terang Sekali</p>
+    <p id="glp" style="display: none;">Selamat Malam, Sleepy Time</p>
+    <p id="pg" style="display: none;">Selamat Pagi, Sarapan Gas</p>
+    <script>
+        let form = document.querySelector("#form-tema");
+        let pilihtema = document.querySelector("#pilih-tema");
+        const body = document.querySelector(".bdy");
+        let textSiang = document.querySelector("#trn");
+        let textMalam = document.querySelector("#glp");
+        let textPagi = document.querySelector("#pg");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            let pilihTemanya = pilihtema.value;
+            textSiang.style.display = "none";
+            textPagi.style.display = "none";
+            textMalam.style.display = "none";
+            if (pilihTemanya == "terang") {
+                body.style.backgroundColor = "yellow";
+                textSiang.style.display = "block";
+            } else if (pilihTemanya == "gelap") {
+                body.style.backgroundColor = "black";
+                textMalam.style.display = "block";
+                textMalam.style.color = "white";
+            } else if (pilihTemanya == "biru") {
+                body.style.backgroundColor = "blue";
+                textPagi.style.display = "block";
+                textPagi.style.color = "white";
+
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>

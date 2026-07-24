@@ -1,0 +1,4 @@
+// Operator Perbandingan Kesamaan:
+//==	: melakukan kesamaan value satu dengan yang lain.
+//===	: melakukan kesamaan value satu dengan yang lain, 
+	  untuk yang === itu menyamakan juga tipe datanya.

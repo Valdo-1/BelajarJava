@@ -19,10 +19,12 @@
             <option value="/">÷</option>
         </select>
 
-        <button onclick="hitungSemua(event)">Hitung</button>
+        <button id="btn">Hitung</button>
     </form>
     <p id="hasil">Hasil Hitungan</p>
     <script>
+        let btn = document.querySelector("#btn");
+        btn.addEventListener("click",hitungSemua);
         function hitungSemua(event) {
             event.preventDefault();
 
@@ -49,7 +51,7 @@
 
             }
             document.querySelector("#hasil").innerHTML = `Hasil Akhir: ${hasil}`;
-        }
+       
 
         //     if (opt == "+") {
         //         hasil = nomor1 + nomor2;
@@ -64,7 +66,7 @@
         //         //hasil = 0;
         //     }
         //     document.querySelector("#hasil").innerHTML = `Hasil Akhir: ${hasil}`;
-
+ }
     </script>
 
 
