@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\BelajarController;
 use App\Http\Controllers\PesertaController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,10 +22,7 @@ Route::get('hitung-kali', [BelajarController::class, 'kali']);
 Route::get('hitung-bagi', [BelajarController::class, 'bagi']);
 Route::get('hitung-pangkat', [BelajarController::class, 'pangkat']);
 Route::get('hitung-akar-pangkat', [BelajarController::class, 'akar_pangkat']);
-Route::get('peserta', [PesertaController::class, 'index'])->name('peserta.index');
-Route::get('peserta/create', [PesertaController::class, 'create'])->name('peserta.create');
-Route::post('peserta/store', [PesertaController::class, 'store'])->name('peserta.store');
-Route::get('peserta/{id}', [PesertaController::class, 'show'])->name('peserta.show');
-Route::get('peserta/{id}/edit', [PesertaController::class, 'edit'])->name('peserta.edit');
-Route::put('peserta/{id}/update', [PesertaController::class, 'update'])->name('peserta.update');
-Route::delete('peserta/{id}/delete', [PesertaController::class, 'delete'])->name('peserta.delete');
+Route::resource('peserta', PesertaController::class);
+
+// ROLE
+Route::resource('role', RoleController::class);

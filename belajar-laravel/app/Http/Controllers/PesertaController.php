@@ -9,45 +9,60 @@ class PesertaController extends Controller
 {
     public function index()
     {
-        $pesertas = Peserta::get();
-        return view('index', compact('pesertas'));
+        $pesertas = Peserta::paginate(10);
+        return view('peserta.index', compact('pesertas'));
     }
     public function create()
     {
-        return view('create');
+        return view('peserta.create');
     }
     //Post
     public function store(Request $request)
     {
-        $nama = $request->nama;
-        $umur = $request->umur;
-        $alamat = $request->alamat;
-        return "Nama anda Adalah $nama, Umur anda $umur, Alamat anda $alamat";
+        $request->validate([
+            'name' => 'required|max:50',
+            'email' => 'required|email|unique:pesertas,email',
+            'age' => 'required|numeric|min:18|max:65',
+            'address' => 'nullable|max:100',
+        ]);
+
+        Peserta::create($request->all());
+
+        return redirect()->route('peserta.index')->with('success', 'Data peserta berhasil ditambahkan');
     }
     //GET
     public function show($id)
     {
-        return "Tampil data peserta dengan ID $id";
+        $peserta = Peserta::findOrFail($id);
+        return response()->json($peserta);
     }
     //GET Edit
     public function edit($id)
     {
-        return "Form edit data peserta dengan ID $id";
+        $peserta = Peserta::findOrFail($id);
+        return view('peserta.edit', compact('peserta'));
     }
     //PUT
     public function update(Request $request, $id)
     {
-        $nama = $request->nama;
-        $umur = $request->umur;
-        $alamat = $request->alamat;
-        return "Nama anda Adalah $nama, Umur anda $umur, Alamat anda $alamat";
+        $request->validate([
+            'name' => 'required|max:50',
+            'email' => 'required|email|unique:pesertas,email,'.$id,
+            'age' => 'required|numeric|min:18|max:65',
+            'address' => 'nullable|max:100',
+        ]);
+
+        $peserta = Peserta::findOrFail($id);
+        $peserta->update($request->all());
+
+        return redirect()->route('peserta.index')->with('success', 'Data peserta berhasil diubah');
     }
     //Delete
-    public function delete(Request $request, $id)
+    public function destroy($id)
     {
-        $nama = $request->nama;
-        $umur = $request->umur;
-        $alamat = $request->alamat;
-        return "Nama anda Adalah $nama, Umur anda $umur, Alamat anda $alamat";
+        $peserta = Peserta::findOrFail($id);
+        $peserta->delete();
+
+        return redirect()->route('peserta.index')->with('success', 'Data peserta berhasil dihapus');
     }
 }
