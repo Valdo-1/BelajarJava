@@ -3,11 +3,17 @@ use App\Http\Controllers\BelajarController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController; 
+use App\Http\Controllers\CategoryController; 
 
-Route::get('/', function () {
-    return view('welcome');
-    
-});
+
+route::get('/', [LoginController::class, 'login'])->name('login');
+route::get('login', [LoginController::class, 'login'])->name('login');
+Route::post('login', [LoginController::class, 'actionLogin'])->name('actionLogin');
+
+
+
 //method : GET, POST, PUT, PATCH, DELETE
 //GET : lihat dan baca
 //POST : mengirim data dari form, aksinya :insert
@@ -22,7 +28,23 @@ Route::get('hitung-kali', [BelajarController::class, 'kali']);
 Route::get('hitung-bagi', [BelajarController::class, 'bagi']);
 Route::get('hitung-pangkat', [BelajarController::class, 'pangkat']);
 Route::get('hitung-akar-pangkat', [BelajarController::class, 'akar_pangkat']);
-Route::resource('peserta', PesertaController::class);
+
+//middleware untuk login
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    
+    Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
+    Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('/category/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
+    Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+    Route::resource('product', ProductController::class);
+    
+    Route::resource('peserta', PesertaController::class);
+    Route::resource('role', RoleController::class); 
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+});
+
 
 // ROLE
-Route::resource('role', RoleController::class);

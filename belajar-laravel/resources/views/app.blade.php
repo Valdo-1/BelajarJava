@@ -36,7 +36,7 @@
 
         <div class="sidebar-brand">
             <i class="bi bi-grid-1x2-fill"></i>
-            <span>CMS Peserta</span>
+            <span>CMS </span>
         </div>
 
         <ul class="sidebar-menu">
@@ -46,29 +46,35 @@
             </li>
 
             <li>
-                <a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">
+                <a href="{{ route('dashboard') }}" class="{{ request()->is('dashboard*') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
             <li>
-                <a href="{{ route('peserta.index') }}" class="parent-link {{ request()->is('peserta.index') ? 'active' : '' }}">
+                <a href="{{ route('peserta.index') }}" class="parent-link {{ request()->is('peserta*') ? 'active' : '' }}">
                     <i class="bi bi-people"></i>
                     <span>Daftar Peserta</span>
                 </a>
             </li>
 
             <li>
-                <a href="{{ route('role.index') }}" class="{{ request()->is('role') ? 'active' : '' }}">
+                <a href="{{ route('role.index') }}" class="{{ request()->is('role*') ? 'active' : '' }}">
                     <i class="bi bi-person-badge"></i>
                     <span>Role</span>
                 </a>
             </li>
 
             <li>
-                <!-- Route produk belum tersedia -->
-                <a href="#" class="{{ request()->is('produk') ? 'active' : '' }}">
+                <a href="{{ route('category.index') }}" class="{{ request()->is('category*') ? 'active' : '' }}">
+                    <i class="bi bi-tags"></i>
+                    <span>Category</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('product.index') }}" class="{{ request()->is('product*') ? 'active' : '' }}">
                     <i class="bi bi-box-seam"></i>
                     <span>Produk</span>
                 </a>
@@ -138,9 +144,7 @@
                 </div>
 
                 <div class="user-info">
-                    <div class="user-name">
-                        Admin
-                    </div>
+                    <span>{{ Auth::user()->name }}</span>
 
                     <div class="user-role">
                         Administrator
