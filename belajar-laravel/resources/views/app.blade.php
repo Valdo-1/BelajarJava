@@ -81,8 +81,7 @@
             </li>
 
             <li>
-                <!-- Route pesanan belum tersedia -->
-                <a href="#" class="{{ request()->is('pesanan') ? 'active' : '' }}">
+                <a href="{{ route('order.index') }}" class="{{ request()->is('order*') ? 'active' : '' }}">
                     <i class="bi bi-cart-check"></i>
                     <span>Pesanan</span>
                 </a>
@@ -93,7 +92,7 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="{{ route('setting.index') }}" class="{{ request()->is('setting*') ? 'active' : '' }}">
                     <i class="bi bi-gear"></i>
                     <span>Settings</span>
                 </a>

@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController; 
 use App\Http\Controllers\CategoryController; 
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\OrderController;
 
 
 route::get('/', [LoginController::class, 'login'])->name('login');
@@ -39,11 +41,17 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/category/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
     Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
     Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
-    Route::resource('product', ProductController::class);
-    
+    Route::resource('product', ProductController::class); 
     Route::resource('peserta', PesertaController::class);
     Route::resource('role', RoleController::class); 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
+    Route::get('/setting/{id}/edit', [SettingController::class, 'edit'])->name('setting.edit');
+    Route::put('/setting/{id}', [SettingController::class, 'update'])->name('setting.update');
+    Route::resource('order', OrderController::class); 
+    Route::get('order/{id}/edit', [OrderController::class, 'edit'])->name('order.edit');
+    Route::put('order/{id}', [OrderController::class, 'update'])->name('order.update');
+    Route::delete('order/{id}', [OrderController::class, 'destroy'])->name('order.destroy');
 });
 
 

@@ -37,8 +37,8 @@ class ProductController extends Controller
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $filename = $file->hashName();
-            $file->move(public_path('uploads/products'), $filename);
-            $data['photo'] = $filename;
+            $file->move(storage_path('app/public/uploads/products'), $filename);
+            $data['photo'] = 'uploads/products/' . $filename;
         }
 
         Product::create($data);

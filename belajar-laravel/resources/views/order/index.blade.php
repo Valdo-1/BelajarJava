@@ -2,9 +2,9 @@
 @section('konten')
 <div class="modern-card stagger-1">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="page-title mb-0" style="font-weight: 700; color: #1e293b;">Data Produk</h2>
-        <a href="{{ route('product.create') }}" class="btn-modern btn-primary">
-            <i class="bi bi-plus-lg"></i> Tambah produk
+        <h2 class="page-title mb-0" style="font-weight: 700; color: #1e293b;">Data Order</h2>
+        <a href="{{ route('order.create') }}" class="btn-modern btn-primary">
+            <i class="bi bi-plus-lg"></i> Tambah Order
         </a>
     </div>
 
@@ -20,35 +20,33 @@
             <thead>
                 <tr>
                     <th class="text-center" style="width: 60px;">No</th>
-                    <th>Nama Produk</th>
-                    <th>Category</th>
-                    <th>Harga</th>
-                    <th>Photo</th>
-                    <th>Deskripsi</th>
+                    <th>Kode Order</th>
+                    <th>Jumlah Order</th>
+                    <th>Kembalian Order</th>
+                    <th>Status</th>
                     <th class="text-center" style="width: 200px;">Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($products as $index => $product)
+                @forelse ($orders as $index => $order)
                 <tr>
-                    <td class="text-center text-muted" style="font-size: 14px;">{{ $products->firstItem() + $index }}</td>
-                    <td>{{ $product->name }}</td>
-                    <td style="font-weight: 600; color: #0f172a;">{{ $product->category->name }}</td>
-                    <td style="font-weight: 600; color: #15ff3cff;">Rp. {{ $product->price }}</td>
+                    <td class="text-center text-muted" style="font-size: 14px;">{{ $orders->firstItem() + $index }}</td>
+                    <td>{{ $order->order_code }}</td>
+                    <td style="font-weight: 600; color: #0f172a;">Rp. {{ number_format($order->order_amount, 2) }}</td>
+                    <td style="font-weight: 600; color: #15ff3cff;">Rp. {{ number_format($order->order_change, 2) }}</td>
                     <td class="text-center">
-                        @if ($product->photo)
-                            <img src="{{ asset('uploads/products/' . $product->photo) }}" alt="Photo" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                        @if ($order->status == 1)
+                            <span class="badge bg-success">Selesai</span>
                         @else
-                            -
+                            <span class="badge bg-danger">Pending</span>
                         @endif
                     </td>
-                    <td style="font-weight: 600; color: #ff6b15ff;">{{ $product->description }}</td>
                     <td class="text-center">
                         <div class="d-flex gap-2 justify-content-center">
-                            <a href="{{ route('product.edit', $product->id) }}" class="btn-modern btn-secondary btn-sm">
+                            <a href="{{ route('order.edit', $order->id) }}" class="btn-modern btn-secondary btn-sm">
                                 <i class="bi bi-pencil-square"></i> Edit
                             </a>
-                            <form action="{{ route('product.destroy', $product->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                            <form action="{{ route('order.destroy', $order->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn-modern btn-danger btn-sm">
@@ -60,7 +58,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" class="text-center py-5 text-muted">Belum ada data product.</td>
+                    <td colspan="5" class="text-center py-5 text-muted">Belum ada data order.</td>
                 </tr>
                 @endforelse
             </tbody>
@@ -68,7 +66,7 @@
     </div>
 
     <div class="mt-4">
-        {{ $products->links('pagination::bootstrap-5') }}
+        {{ $orders->links('pagination::bootstrap-5') }}
     </div>
 </div>
 @endsection
