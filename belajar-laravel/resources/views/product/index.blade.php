@@ -37,7 +37,7 @@
                     <td style="font-weight: 600; color: #15ff3cff;">Rp. {{ $product->price }}</td>
                     <td class="text-center">
                         @if ($product->photo)
-                            <img src="{{ asset('uploads/products/' . $product->photo) }}" alt="Photo" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                            <img src="{{ asset('storage/products/' . $product->photo) }}" alt="{{ $product->name }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
                         @else
                             -
                         @endif

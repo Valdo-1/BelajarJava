@@ -15,6 +15,13 @@
         </div>
     @endif
 
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     <div class="table-responsive">
         <table class="modern-table">
             <thead>
@@ -43,8 +50,8 @@
                     </td>
                     <td class="text-center">
                         <div class="d-flex gap-2 justify-content-center">
-                            <a href="{{ route('order.edit', $order->id) }}" class="btn-modern btn-secondary btn-sm">
-                                <i class="bi bi-pencil-square"></i> Edit
+                            <a href="{{ route('order.show', $order->id) }}" class="btn-modern btn-info btn-sm text-white">
+                                <i class="bi bi-eye"></i> Detail
                             </a>
                             <form action="{{ route('order.destroy', $order->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                 @csrf

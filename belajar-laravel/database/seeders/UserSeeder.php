@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -13,11 +14,13 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create Owner user
-        $user = User::create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => '123',
-        ]);
+        // Create Owner user (aman dijalanin berkali-kali, gak akan duplikat)
+        User::firstOrCreate(
+            ['email' => 'admin@gmail.com'],
+            [
+                'name' => 'Admin',
+                'password' => Hash::make('123'),
+            ]
+        );
     }
 }
